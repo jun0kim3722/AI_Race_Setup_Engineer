@@ -1,0 +1,44 @@
+porsche_992_gt3_r:
+  WHEELBASE : 2.507
+  FRONT_AXLE : 1.52927
+  REAR_AXLE : 0.97773
+
+mclaren_720s_gt3_evo:
+  WHEELBASE : 2.696
+  FRONT_AXLE : 1.348
+  REAR_AXLE : 1.348
+
+ferrari_296_gt3:
+  WHEELBASE : 2.660
+  FRONT_AXLE : 1.330
+  REAR_AXLE : 1.330
+
+ferrari_488_gt3_evo:
+  WHEELBASE : 2.710
+  FRONT_AXLE : 1.355
+  REAR_AXLE : 1.355
+
+mercedes_amg_gt3_evo:
+  WHEELBASE : 2.630
+  FRONT_AXLE : 1.3676
+  REAR_AXLE : 1.2624
+
+bmw_m4_gt3:
+  WHEELBASE : 2.917
+  FRONT_AXLE : 1.4585
+  REAR_AXLE : 1.4585
+
+amr_v8_vantage_gt3:
+  WHEELBASE : 2.705
+  FRONT_AXLE : 1.3525
+  REAR_AXLE : 1.3525
+
+honda_nsx_gt3_evo:
+  WHEELBASE : 2.630
+  FRONT_AXLE : 1.5254
+  REAR_AXLE : 1.1046
+
+audi_r8_lms_evo:
+  WHEELBASE : 2.650
+  FRONT_AXLE : 1.1192
+  REAR_AXLE : 1.4575

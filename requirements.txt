@@ -1,0 +1,12 @@
+uv
+mcp[cli]==1.10.1
+mcp[http]
+openai==1.75.0
+python-dotenv
+ipykernel
+httpx
+numpy
+pandas
+matplotlib
+scipy
+PyYAML
