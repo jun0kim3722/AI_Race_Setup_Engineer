@@ -107,9 +107,9 @@ Enter the session number you would like to analyze:
 ```
 Please enter an integer to select the correct session.
 
-### Step by Step Guide
-## Using the AI Setup Engineer
+<br>
 
+### Step by Step Guide
 Follow these steps to analyze and optimize your car setups using the AI setup engineer:
 
 1. **Load Initial Session and Setup Data**  
@@ -141,11 +141,15 @@ Follow these steps to analyze and optimize your car setups using the AI setup en
    When finished, type `exit`/`e` or `quit`/`q` to end the session.  
    You can always save the current chat and continue later, maintaining continuity between sessions.
 
+<br>
+
 ## TODO List
 - [ ] Add setup guide for LLM
 - [ ] Dockerize
 - [ ] Connect to web
 - [ ] Add multiple language support
+
+<br>
 
 ## Author:
 ***Junyoung Kim @ Purdue University ECE***
@@ -153,6 +157,10 @@ Follow these steps to analyze and optimize your car setups using the AI setup en
 - LinkedIn: [Junyoung (Jun) Kim](https://www.linkedin.com/in/jun0kim0329/)
 - Portfolio: [Jun Kim's web](https://jun0kim.vercel.app/)
 
+<br>
+
 ## Reference
 This project incorporates code originally written by [gotzl](https://github.com/gotzl/ldparser) for MoTeC data parser.
+
+ACC setup information was referenced from the [Coach Dave Academy](https://coachdaveacademy.com/tutorials/the-ultimate-acc-car-setup-guide/).
 
