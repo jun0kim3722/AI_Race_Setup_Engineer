@@ -183,7 +183,6 @@ Follow these steps to analyze and optimize your car setups using the AI setup en
 <br>
 
 ## Reference
-This project incorporates code originally written by [gotzl](https://github.com/gotzl/ldparser) for MoTeC data parser.
-
-ACC setup information was referenced from the [Coach Dave Academy](https://coachdaveacademy.com/tutorials/the-ultimate-acc-car-setup-guide/).
+- This project incorporates code originally written by [gotzl](https://github.com/gotzl/ldparser) for MoTeC data parser.
+- ACC setup information was referenced from the [Coach Dave Academy](https://coachdaveacademy.com/tutorials/the-ultimate-acc-car-setup-guide/).
 
