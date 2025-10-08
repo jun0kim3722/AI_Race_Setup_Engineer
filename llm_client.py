@@ -40,7 +40,6 @@ class OpenRouterClient:
         self.write: Optional[Any] = None
         
         # TODO Add berif explanation about what each setup change does so it does not make mistake of suggesting opposite direction of the fix.
-        # TODO test non empty return
         self.messages: List[Dict[str, str]] = [
             {
                 "role": "system",
@@ -82,7 +81,7 @@ class OpenRouterClient:
                     "The user's request will fall into one of four distinct workflows. **You must default to Option 1 if the user does not specify a goal.**\n\n"
                     "#### Option 1: Hotlap/Qualifying Setup Adjustment (Default)\n"
                     "**Goal:** Maximize single-lap performance and peak grip from a default or previous setup.\n\n"
-                    "**Method:** **ALWAYS** preface your response with a status indicating the current step (e.g., 'CURRENT STEP 1/6: Tires & Basic Brakes') and transition to the next step once the current one is complete.\n"
+                    "**Method:** **FOR OPTION 1, ALWAYS** preface your response with a status indicating the current step (e.g., 'CURRENT STEP 1/6: Tires & Basic Brakes') and transition to the next step once the current one is complete.\n"
                     "**Required Setup Adjustment Order:**\n"
                     "1.  **Tires & Basic Brakes:** Set optimal **Tire Pressure** and **Brake Duct** (to manage tire temperature). Set **Brake Bias** to establish basic cornering style under braking. **Brake Pad Compound must be set to 1.**\n"
                     "2.  **Suspension (Low/Medium Corner Balance):** Use **Anti-Roll Bars (ARB)** and **Wheel Rate** (springs) to define the car's behavior in slow and medium-speed corners.\n"
@@ -168,11 +167,13 @@ class OpenRouterClient:
         chat_files = os.listdir(chat_dir)
         chat_files.sort(key=lambda f: os.path.getmtime(os.path.join(chat_dir, f)), reverse=True)
 
-        print(f"{'No.':<4} {'Chat Name':<20} {'Date and Time':<12}\n")
+        print("\n--------- Loading Previous Conversation ------------------------------------")
+        print(f"{'No.':<4} {'Chat Name':<20} {'Date and Time':<12}")
         for i, name in enumerate(chat_files, start=1):
             mtime = os.path.getmtime(os.path.join(chat_dir, name))
             time_str = datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M:%S')
             print(f"{i:<4} {name[:-5]:<20} {time_str:<12}")
+        print("----------------------------------------------------------------------------------\n")
         
         while True:
             try:
@@ -206,14 +207,26 @@ class OpenRouterClient:
                 break
             else:
                 print("Invalid input. Please enter a valid workflow number (1, 2, 3, or 4).")
-                
-        new_call_message = {
-            "role": "user",
-            "content": (
-                "I am ready to begin the setup process. Please start the analysis using **Option {workflow}** workflow.\n"
-            ),
-        }
-        self.messages.append(new_call_message)
+
+        if workflow == '4':
+            new_call_message = {
+                "role": "user",
+                "content": (
+                    f"I am leading our previous converstion with **Option {workflow}** workflow. Please continue analyze based on previous conversation.\n"
+                ),
+            }
+            self.messages.append(new_call_message)
+            await self.read_message_record()
+        
+        else:
+            new_call_message = {
+                "role": "user",
+                "content": (
+                    f"I am ready to begin the setup process. Please start the analysis using **Option {workflow}** workflow.\n"
+                ),
+            }
+            self.messages.append(new_call_message)
+
 
     async def read_new_session(self):
         if self.session is None:
@@ -221,8 +234,10 @@ class OpenRouterClient:
         
         while True:
             try:
+                print("\n----------- Loading MoTeC Data ------------------------------------")
                 motec_file_info = await self.session.call_tool("get_telemetry_file_info", arguments={})
                 print(motec_file_info.content[0].text)
+                print("-------------------------------------------------------------------")
                 ld_ldx_idx_str = await asyncio.to_thread(input, "Enter the session number you would like to analyze: ")
                 ld_ldx_idx = int(ld_ldx_idx_str) - 1
                 break 
@@ -233,9 +248,11 @@ class OpenRouterClient:
 
         while True:
             try:
+                print("\n----------- Loading Setup Data ------------------------------------")
                 setup_file_info = await self.session.call_tool("get_setup_file_info", arguments={"ld_ldx_idx": ld_ldx_idx})
                 print(setup_file_info.content[0].text)
-                setup_idx_str = await asyncio.to_thread(input, "Enter the setup number you used: ")
+                print("-------------------------------------------------------------------")
+                setup_idx_str = await asyncio.to_thread(input, "Enter the setup number you would like to analyze: ")
                 setup_idx = int(setup_idx_str) - 1
                 break
             except ValueError:
