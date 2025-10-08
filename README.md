@@ -1,5 +1,8 @@
 # AI Race Setup Engineer
 This project helps users analyze and optimize **Assetto Corsa Competizione (ACC)** car setups, even without prior technical knowledge or extensive data visualization skills. The Large Language Model (LLM) takes your MoTeC telemetry data and setup information, then provides recommendations based on your feedback and preferences.
+<img width="2780" height="1502" alt="Screenshot from 2025-10-08 11-11-44" src="https://github.com/user-attachments/assets/156064ac-ce31-402b-b828-fbec5a9e1f4f" />
+
+
 
 ### Currently Supported Cars
 - Porsche 992 GT3 R
@@ -25,7 +28,7 @@ pip install -r requirements.txt
 
 Set your API key and LLM model:
 ```
-# This project was tested with deepseek/deepseek-chat-v3.1:free
+# This project was tested with deepseek/deepseek-chat-v3.1:free and nvidia/nemotron-nano-9b-v2:free
 echo "OPENROUTER_API_KEY=<your key here>" > .env
 echo "OPENROUTER_MODEL=<your LLM model name here>" > .env
 ```
@@ -43,7 +46,7 @@ echo "SETUP_DIR=<your MoTeC file directory>" > .env
 For testing purposes, you can set the `.env` file as follows:
 ```
 # LLM setup
-OPENROUTER_MODEL=deepseek/deepseek-chat-v3.1:free
+OPENROUTER_MODEL=deepseek/deepseek-chat-v3.1:free or nvidia/nemotron-nano-9b-v2:free
 OPENROUTER_API_KEY=<Your API Key>
 
 # ACC file directory
@@ -91,10 +94,13 @@ This option allows you to pick up exactly where you left off, continuing a workf
 
 <br>
 
-### Loading MoTeC data and setup
+### Loading MoTeC data and Setup data
 When you run `python llm_client.py`, the program will list all of your MoTeC data.
 Example:
 ```
+--------- Loading MoTeC Data --------------------------------------
+[10/08/25 11:32:37] INFO     Processing request of type CallToolRequest                                                                                                                                                 server.py:664
+                    INFO     Processing request of type ListToolsRequest                                                                                                                                                server.py:664
 No.  Track Name           Car Name             Date         Time    
 1    monza                porsche_992_gt3_r    2025.09.06   22.13.11
 2    nurburgring          porsche_992_gt3_r    2025.09.06   21.43.58
@@ -103,9 +109,26 @@ No.  Track Name           Car Name             Date         Time
 5    mount_panorama       porsche_992_gt3_r    2025.09.06   20.27.42
 6    mount_panorama       porsche_992_gt3_r    2025.09.06   20.03.41
 
-Enter the session number you would like to analyze:
+-------------------------------------------------------------------
+Enter the session number you would like to analyze: <int>
+
+--------- Loading Setup Data --------------------------------------
+[10/08/25 11:32:38] INFO     Processing request of type CallToolRequest                                                                                                                                                 server.py:664
+No.  Setup Name          
+1    1.3.json
+2    20min.json
+3    1.json
+4    1.7.json
+5    2stop.json
+6    1.4.json
+7    1.5.json
+8    1.6.json
+9    1.2.json
+
+-------------------------------------------------------------------
+Enter the setup number you would like to analyze: <int>
 ```
-Please enter an integer to select the correct session.
+Please enter an integer to select the correct MoTeC data and Setup.
 
 <br>
 
